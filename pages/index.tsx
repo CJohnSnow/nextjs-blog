@@ -39,7 +39,7 @@ const Home: NextPage = () => {
             },
           ]}
         />
-      <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
+      <div className="site-layout-background">
         <SwitchPicture />
       </div>
     </Content>
