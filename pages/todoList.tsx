@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useState, useMemo } from "react";
+import { Button } from "antd";
 
 const TodoList: NextPage = () => {
   const [count, setCount] = useState(0);
@@ -23,12 +24,12 @@ const TodoList: NextPage = () => {
         {todos.map((todo, index) => {
           return <p key={index}>{todo}</p>;
         })}
-        <button onClick={addTodo}>Add Todo</button>
+        <Button onClick={addTodo}>Add Todo</Button>
       </div>
       <hr />
       <div>
         Count: {count}
-        <button onClick={increment}>+</button>
+        <Button onClick={increment}>+</Button>
         <h2>Expensive Calculation</h2>
         {calculation}
       </div>
