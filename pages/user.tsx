@@ -6,7 +6,7 @@ import TodoList from './todoList';
 
 const User: NextPage = () => {
 
-  const [user, setUser] = React.useState('SXT');
+  const [user, setUser] = React.useState('cjs');
   return (
     <div className={styles.container}>
 
