@@ -5,6 +5,7 @@ const { Header, Content, Footer } = Layout;
 import styles from '../styles/Home.module.css'
 // import User from './user'
 import SwitchPicture from './carousel';
+import CalendarContainer from './calender/rate';
 
 const Home: NextPage = () => {
   return (
@@ -41,6 +42,7 @@ const Home: NextPage = () => {
         />
       <div className="site-layout-background">
         <SwitchPicture />
+        <CalendarContainer />
       </div>
     </Content>
     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
