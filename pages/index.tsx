@@ -6,11 +6,12 @@ import styles from '../styles/Home.module.css'
 // import User from './user'
 import SwitchPicture from './carousel';
 import CalendarContainer from './calender/rate';
+import BackTopButton from './BackTop';
 
 const Home: NextPage = () => {
   return (
     <Layout>
-    <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+    <Header style={{ position: 'fixed', zIndex: 999, width: '100%' }}>
       <div className="logo" />
       <Menu
         theme="dark"
@@ -46,6 +47,7 @@ const Home: NextPage = () => {
       </div>
     </Content>
     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+    <BackTopButton />
   </Layout>
   )
 }
