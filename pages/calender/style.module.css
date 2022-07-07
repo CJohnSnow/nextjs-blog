@@ -1,19 +1,57 @@
-.events {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .events .ant-badge-status {
-    width: 100%;
-    overflow: hidden;
-    font-size: 12px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-  .notesMonth {
-    font-size: 28px;
-    text-align: center;
-  }
-  .notesMonth section {
-    font-size: 28px;
-  }
+.app {
+  height: 1000px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.app > span {
+  font-size: 32px;
+  z-index: 999;
+}
+.app__content {
+  width: 1280px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+}
+.app__content:nth-child(2) {
+  margin-left: 1280px;
+}
+.app__content:nth-child(3) {
+  margin-left: 2540px;
+}
+.app__content__item {
+  width: 14%;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  background-color: white;
+}
+.app__content:nth-child(2) > .app__content__item {
+  background-color: aquamarine;
+}
+.app__content:nth-child(3) > .app__content__item {
+  background-color: beige;
+}
+@media screen and (max-width: 1000px) {
+    .app__content {
+      width: 880px;
+    }
+    .app__content__item {
+      width: 16%;
+    }
+    .app__content:nth-child(2) {
+      margin-left: 1260px;
+    }
+    .app__content:nth-child(3) {
+      margin-left: 2520px;
+    }
+}
+
+
