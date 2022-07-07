@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { Layout } from 'antd';
-import CalendarContainer from './Calender';
+import CalendarContainer from './Calender/index';
 import DragAndDropPage from './dragComponent';
 
 const { Content, Footer } = Layout;
