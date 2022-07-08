@@ -11,7 +11,7 @@ const Home: NextPage = () => {
     <Content className="site-layout" style={{ padding: '24px 50px' }}>
       <div className="site-layout-background">
         <SwipeContainer />
-        <DragAndDropPage />
+        {/* <DragAndDropPage /> */}
       </div>
     </Content>
   </Layout>

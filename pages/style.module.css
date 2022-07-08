@@ -49,92 +49,128 @@
 }
 
  */
- .content {
-     /* 100%窗口高度 */
-     height: 100vh;
-     /* 弹性布局 居中 */
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     /* 渐变背景 */
- }
+.content {
+  /* 100%窗口高度 */
+  height: 100vh;
+  /* 弹性布局 居中 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 渐变背景 */
+}
 
- .swipe {
-     /* 相对定位 */
-     position: relative;
-     width: 1200px;
-     height: 100vh;
-     text-align: center;
-     color: #fff;
-     /* 溢出隐藏 */
-     overflow: hidden;
- }
+.swipe {
+  /* 相对定位 */
+  position: relative;
+  width: 1200px;
+  height: 100vh;
+  text-align: center;
+  color: #fff;
+  /* 溢出隐藏 */
+  overflow: hidden;
+}
 
- .swipe > input {
+.swipe>input {
   display: none;
- }
+}
 
- .swipe ul {
-     padding: 0;
-     width: calc(1200px * 3);
-     transition: all 0.5s ease-in-out;
- }
+.swipe ul {
+  padding: 0;
+  width: calc(1200px * 3);
+  transition: all 0.5s ease-in-out;
+}
 
- .swipe li {
-     float: left;
-     width: 1200px;
-     height: 100vh;
-     list-style: none;
-     display: inline-grid;
-     align-items: center;
-     justify-items: center;  
-     justify-content: center;
-     align-content: center;
- }
+.swipe li {
+  float: left;
+  width: 1200px;
+  height: 100vh;
+  list-style: none;
+  display: inline-grid;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+}
 
- .swipe li:nth-child(1) {
-     background-color: lightcoral;
- }
+.draggableContent:hover {
+  background-color: salmon;
+}
 
- .swipe li:nth-child(2) {
-     background-color: lightseagreen;
- }
+.autoAnimation {
+  animation: shake 800ms ease-in-out infinite;
+  animation-play-state: running;
+}
 
- .swipe li:nth-child(3) {
-     background-color: lightsalmon;
- }
+.swipe li:nth-child(1) {
+  background-color: lightcoral;
+}
 
- /* for属性值以“indicator”开头的所有label元素（指示器） */
- .swipe label[for^="indicator"] {
-     /* 绝对定位 */
-     position: absolute;
-     top: 92%;
-     width: 40px;
-     height: 16px;
-     background-color: rgba(255, 255, 255, 0.3);
-     border-radius: 16px;
-     cursor: pointer;
-     transition: 0.3s;
- }
+.swipe li:nth-child(2) {
+  background-color: lightseagreen;
+}
 
- /* for属性值为“indicator1”的label元素 */
- .swipe label[for="indicator0"] {
-     left: 44%;
- }
+.swipe li:nth-child(3) {
+  background-color: lightsalmon;
+}
 
- /* for属性值为“indicator2”的label元素 */
- .swipe label[for="indicator1"] {
-     left: 49%;
- }
+/* for属性值以“indicator”开头的所有label元素（指示器） */
+.swipe label[for^="indicator"] {
+  /* 绝对定位 */
+  position: absolute;
+  top: 92%;
+  width: 40px;
+  height: 16px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
- /* for属性值为“indicator3”的label元素 */
- .swipe label[for="indicator2"] {
-     left: 54%;
- }
+/* for属性值为“indicator1”的label元素 */
+.swipe label[for="indicator0"] {
+  left: 44%;
+}
 
- @media screen and (max-width: 1000px) {
+/* for属性值为“indicator2”的label元素 */
+.swipe label[for="indicator1"] {
+  left: 49%;
+}
+
+/* for属性值为“indicator3”的label元素 */
+.swipe label[for="indicator2"] {
+  left: 54%;
+}
+
+@media screen and (max-width: 1000px) {
   .swipe li {
     width: 860px;
+  }
+}
+
+@keyframes shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(+2px, 0, 0);
+  }
+
+  30%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(+4px, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-4px, 0, 0);
   }
 }
 

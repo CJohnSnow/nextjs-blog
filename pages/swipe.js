@@ -13,8 +13,6 @@ const COLUMN = 4;
 const WIDTH = 120;
 //  每个元素高度
 const HEIGHT = 80;
-// 图片左右 padding
-const IMAGE_PADDING = 5;
 
 function spArr(arr, num) {
   let newArr = [];
@@ -40,6 +38,60 @@ function useWindowSize() {
   return windowSize;
 }
 
+function insertBefore(list, from, to) {
+  const copy = [...list];
+  const fromIndex = copy.indexOf(from);
+  if (from === to) {
+    return copy;
+  }
+  copy.splice(fromIndex, 1);
+  const newToIndex = to ? copy.indexOf(to) : -1;
+  if (to && newToIndex >= 0) {
+    copy.splice(newToIndex, 0, from);
+  } else {
+    copy.push(from);
+  }
+  return copy;
+}
+
+function useLongPress(callback = () => {}, ms = 300) {
+  const [startLongPress, setStartLongPress] = useState(false);
+
+  useEffect(() => {
+    let timerId;
+    if (startLongPress) {
+      timerId = setTimeout(callback, ms);
+    } else {
+      clearTimeout(timerId);
+    }
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [callback, ms, startLongPress]);
+
+  return {
+    onMouseDown: () => setStartLongPress(true),
+    onMouseUp: () => setStartLongPress(false),
+    onMouseLeave: () => setStartLongPress(false),
+    onTouchStart: () => setStartLongPress(true),
+    onTouchEnd: () => setStartLongPress(false),
+  };
+}
+
+function isEqualBy(a, b, key) {
+  const aList = a.map((item) => item[key]);
+  const bList = b.map((item) => item[key]);
+
+  let flag = true;
+  aList.forEach((i, idx) => {
+    if (i !== bList[idx]) {
+      flag = false;
+    }
+  });
+  return flag;
+}
+
 const SwipeContainer = () => {
   const [checkedIndex, setCheckedIndex] = useState(0);
   const [list, setList] = useState(
@@ -55,16 +107,16 @@ const SwipeContainer = () => {
   const size = Number(useWindowSize());
 
   // 拖拽方法实现
-  const sortedList = useMemo(() => {
-    return list.slice().sort((a, b) => {
+  const sortedList = (d) => {
+    return d.slice().sort((a, b) => {
       return a.id - b.id;
     });
-  }, [list]);
+  };
 
-  const listHeight = useMemo(() => {
-    const size = list.length;
-    return Math.ceil(size / COLUMN) * HEIGHT;
-  }, [list]);
+  // const listHeight = useMemo(() => {
+  //   const size = list.length;
+  //   return Math.ceil(size / COLUMN) * HEIGHT;
+  // }, [list]);
 
   const updateList = useCallback(
     (clientX, clientY) => {
@@ -83,25 +135,25 @@ const SwipeContainer = () => {
         ) {
           return;
         }
-
+        const dataList = spArr(list, 30)[checkedIndex]
         const col = Math.floor(offsetX / WIDTH);
         const row = Math.floor(offsetY / HEIGHT);
         let currentIndex = row * COLUMN + col;
-        const fromIndex = list.indexOf(dragItem);
+        const fromIndex = dataList.indexOf(dragItem);
         if (fromIndex < currentIndex) {
           // 从前往后移动
           currentIndex++;
         }
-        const currentItem = list[currentIndex];
+        const currentItem = dataList[currentIndex];
 
-        const ordered = insertBefore(list, dragItem, currentItem);
-        if (isEqualBy(ordered, list, "id")) {
+        const ordered = insertBefore(dataList, dragItem, currentItem);
+        if (isEqualBy(ordered, dataList, "id")) {
           return;
         }
         setList(ordered);
       }
     },
-    [list]
+    [checkedIndex, list]
   );
 
   const handleDragOver = useCallback(
@@ -115,7 +167,6 @@ const SwipeContainer = () => {
   const handleDragStart = (e, data) => {
     dragItemRef.current = data;
     const el = dropAreaRef.current.querySelector(`[data-id="${data.id}"]`);
-    console.log(dropAreaRef)
     if (el) {
       el.classList.add(styles.draggingItem);
     }
@@ -132,9 +183,24 @@ const SwipeContainer = () => {
     }
   }, []);
 
+  const backspaceLongPress = useLongPress(() => {
+    const el = dropAreaRef.current.querySelectorAll('.draggableContent');
+    console.log(el)
+    if (el) {
+      el.forEach((i) => {
+        i.classList.add(styles.autoAnimation)
+      });
+    }
+  }, 500);
+
   return (
     <div className={styles.content}>
-      <div className={styles.swipe}>
+      <div
+        className={styles.swipe}
+        ref={dropAreaRef}
+        // onDragEnd={handleDragEnd}
+        // onDragOver={handleDragOver}
+      >
         {new Array(3).fill(1).map((_, i) => (
           <React.Fragment key={i}>
             <input
@@ -159,21 +225,20 @@ const SwipeContainer = () => {
           {spArr(list, 30).map((d, i) => (
             <li
               key={i}
-              ref={dropAreaRef}
-              onDragEnd={handleDragEnd}
-              onDragOver={handleDragOver}
               style={{
                 gridTemplateColumns: `repeat(${size === 1200 ? 6 : 5}, 80px)`,
                 gridRowGap: "20px",
                 gridColumnGap: "20px",
               }}
             >
-              {d.map((_, index) => (
+              {sortedList(d).map((_, index) => (
                 <div
                   draggable
-                  data-id={index}
+                  data-id={_.id}
                   onDragStart={(e) => handleDragStart(e, _)}
                   key={String(index + 1)}
+                  {...backspaceLongPress}
+                  className="draggableContent"
                   style={{
                     display: "flex",
                     justifyContent: "center",
@@ -197,4 +262,4 @@ const SwipeContainer = () => {
   );
 };
 
-export default SwipeContainer;
+export default React.memo(SwipeContainer);
