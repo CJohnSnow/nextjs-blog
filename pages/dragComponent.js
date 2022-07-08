@@ -137,6 +137,7 @@ const DragAndDropPage = () => {
   const handleDragStart = (e, data) => {
     dragItemRef.current = data;
     const el = dropAreaRef.current.querySelector(`[data-id="${data.id}"]`);
+    console.log(el)
     if (el) {
       el.classList.add(styles.draggingItem);
     }
