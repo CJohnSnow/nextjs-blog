@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { Layout } from 'antd';
 import DragAndDropPage from './dragComponent';
-import SwipeContainer from './Calender/index'
+import SwipeContainer from './swipe'
 
 const { Content } = Layout;
 

@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/Calender/index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/swipe.js"],
   "exclude": ["node_modules"]
 }
