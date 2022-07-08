@@ -197,4 +197,4 @@ const SwipeContainer = () => {
   );
 };
 
-export default swipeContainer;
+export default SwipeContainer;
