@@ -185,13 +185,21 @@ const SwipeContainer = () => {
 
   const backspaceLongPress = useLongPress(() => {
     const el = dropAreaRef.current.querySelectorAll('.draggableContent');
-    console.log(el)
     if (el) {
       el.forEach((i) => {
         i.classList.add(styles.autoAnimation)
       });
     }
   }, 500);
+
+  const removeAnimation = () => {
+    const el = dropAreaRef.current.querySelectorAll('.draggableContent');
+    if (el) {
+      el.forEach((i) => {
+        i.classList.remove(styles.autoAnimation)
+      });
+    }
+  }
 
   return (
     <div className={styles.content}>
@@ -230,6 +238,7 @@ const SwipeContainer = () => {
                 gridRowGap: "20px",
                 gridColumnGap: "20px",
               }}
+              onClick={() => removeAnimation()}
             >
               {sortedList(d).map((_, index) => (
                 <div
